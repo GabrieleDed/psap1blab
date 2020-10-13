@@ -21,8 +21,8 @@ function App() {
           <Container>
 
             <Navbar.Brand>
-              <Link to={"/create-employee"} className="nav-link">
-                React MERN Stack App
+              <Link to={"/employee-list"} className="nav-link">
+                Darbas, Gabrielė Dėdinaitė
               </Link>
             </Navbar.Brand>
 
@@ -55,7 +55,7 @@ function App() {
           <Col md={12}>
             <div className="wrapper">
               <Switch>
-                <Route exact path='/' component={CreateEmployee} />
+                <Route exact path='/' component={EmployeeList} />
                 <Route path="/create-employee" component={CreateEmployee} />
                 <Route path="/edit-employee/:id" component={EditEmployee} />
                 <Route path="/employee-list" component={EmployeeList} />

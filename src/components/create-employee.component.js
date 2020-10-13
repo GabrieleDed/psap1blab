@@ -8,8 +8,8 @@ export default class CreateEmployee extends Component {
     super(props)
 
     // Setting up functions
-    this.onChangeEmployeeFirsName = this.onChangeEmployeeFirstName.bind(this);
-    this.onChangeEmployeeLastName = this.onChangeEmployeeFirstName.bind(this);
+    this.onChangeEmployeeFirstName = this.onChangeEmployeeFirstName.bind(this);
+    this.onChangeEmployeeLastName = this.onChangeEmployeeLastName.bind(this);
     this.onChangeEmployeePosition = this.onChangeEmployeePosition.bind(this);
     this.onChangeEmployeeDepartment = this.onChangeEmployeeDepartment.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -49,11 +49,6 @@ export default class CreateEmployee extends Component {
     axios.post('http://localhost:4000/employees/create-employee', employeeObject)
       .then(res => console.log(res.data));
 
-    console.log(`Employee successfully created!`);
-    console.log(`FName: ${this.state.fname}`);
-    console.log(`LName: ${this.state.lname}`);
-    console.log(`Position: ${this.state.position}`);
-    console.log(`Department: ${this.state.department}`);
 
     this.setState({fname: '', lname: '' , position: '', department: '' })
   }
@@ -61,7 +56,7 @@ export default class CreateEmployee extends Component {
   render() {
     return (<div className="form-wrapper">
       <Form onSubmit={this.onSubmit}>
-        <Form.Group controlId="FtName">
+        <Form.Group controlId="FName">
           <Form.Label>First Name</Form.Label>
           <Form.Control type="text" value={this.state.fname} onChange={this.onChangeEmployeeFirstName}/>
         </Form.Group>
