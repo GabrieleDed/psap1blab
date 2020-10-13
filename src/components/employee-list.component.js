@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import axios from 'axios';
 import Table from 'react-bootstrap/Table';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import EmployeeService from '../services/EmployeeService';
 
 export default class EmployeeList extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ export default class EmployeeList extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:4000/employees/')
+    EmployeeService.getAll()
       .then(res => {
         this.setState({
           employees: res.data
@@ -25,7 +25,7 @@ export default class EmployeeList extends Component {
   }
 
   deleteEmployee(id) {
-    axios.delete('http://localhost:4000/employees/delete-employee/' + id)
+    EmployeeService.remove(id)
       .then((res) => {
         console.log('Employee successfully deleted!')
       }).catch((error) => {
@@ -67,6 +67,3 @@ export default class EmployeeList extends Component {
     </div>);
   }
 }
-
-
-

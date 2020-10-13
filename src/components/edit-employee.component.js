@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
-import axios from 'axios';
+import EmployeeService from '../services/EmployeeService';
 
 export default class EditEmployee extends Component {
   constructor(props) {
@@ -24,7 +24,7 @@ export default class EditEmployee extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:4000/employees/edit-employee/' + this.props.match.params.id)
+    EmployeeService.get(this.props.match.params.id)
       .then(res => {
         this.setState({
           fname: res.data.fname,
@@ -39,18 +39,18 @@ export default class EditEmployee extends Component {
   }
 
   onChangeEmployeeFirstName(e) {
-    this.setState({fname: e.target.value})
+    this.setState({ fname: e.target.value })
   }
   onChangeEmployeeLastName(e) {
-    this.setState({lname: e.target.value})
+    this.setState({ lname: e.target.value })
   }
 
   onChangeEmployeePosition(e) {
-    this.setState({position: e.target.value})
+    this.setState({ position: e.target.value })
   }
 
   onChangeEmployeeDepartment(e) {
-    this.setState({department: e.target.value})
+    this.setState({ department: e.target.value })
   }
 
   async onSubmit(e) {
@@ -63,7 +63,7 @@ export default class EditEmployee extends Component {
       department: this.state.department
     };
 
-    await axios.put('http://localhost:4000/employees/update-employee/' + this.props.match.params.id, employeeObject)
+    await EmployeeService.update(this.props.match.params.id, employeeObject)
       .then((res) => {
         console.log(res.data)
         console.log('Employee successfully updated')
@@ -79,24 +79,24 @@ export default class EditEmployee extends Component {
   render() {
     return (<div className="form-wrapper">
       <Form onSubmit={this.onSubmit}>
-      <Form.Group controlId="FName">
+        <Form.Group controlId="FName">
           <Form.Label>First Name</Form.Label>
-          <Form.Control type="text" value={this.state.fname} onChange={this.onChangeEmployeeFirstName}/>
+          <Form.Control type="text" value={this.state.fname} onChange={this.onChangeEmployeeFirstName} />
         </Form.Group>
 
         <Form.Group controlId="LName">
           <Form.Label>Last Name</Form.Label>
-          <Form.Control type="text" value={this.state.lname} onChange={this.onChangeEmployeeLastName}/>
+          <Form.Control type="text" value={this.state.lname} onChange={this.onChangeEmployeeLastName} />
         </Form.Group>
 
         <Form.Group controlId="Position">
           <Form.Label>Position</Form.Label>
-          <Form.Control type="text" value={this.state.position} onChange={this.onChangeEmployeePosition}/>
+          <Form.Control type="text" value={this.state.position} onChange={this.onChangeEmployeePosition} />
         </Form.Group>
 
         <Form.Group controlId="Department">
           <Form.Label>Department</Form.Label>
-          <Form.Control type="text" value={this.state.department} onChange={this.onChangeEmployeeDepartment}/>
+          <Form.Control type="text" value={this.state.department} onChange={this.onChangeEmployeeDepartment} />
         </Form.Group>
 
         <Button variant="danger" size="lg" block="block" type="submit">
@@ -106,6 +106,3 @@ export default class EditEmployee extends Component {
     </div>);
   }
 }
-
-
-
